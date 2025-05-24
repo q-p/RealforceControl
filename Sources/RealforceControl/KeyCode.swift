@@ -7,7 +7,7 @@
 
 
 nonisolated(unsafe)
-let hexNumRegex = /0[xX]([0-9,a-f,A-F]+)/
+public let hexNumRegex = /0[xX]([0-9,a-f,A-F]+)/
 
 /// USB HID keycodes from page 0x07 (but internally the keyboard does not store the page for these, it's 0x00).
 /**
@@ -247,9 +247,9 @@ public enum KeyCode8: Sendable, CustomStringConvertible {
   public var description: String {
     switch self {
     case .named(let n):
-      return String(format: "0x%02X[.\(n)]", self.rawValue)
+      return String(format: "0x%02x[.\(n)]", self.rawValue)
     case .raw(let r):
-      return String(format: "0x%02X", r)
+      return String(format: "0x%02x", r)
     }
   }
 }
@@ -258,7 +258,7 @@ extension KeyCode8 {
   public init?(_ text: String) {
     if let named = NamedKeyCode8(name: text) { // enum string
       self = .named(named)
-    } else if let match = text.wholeMatch(of: hexNumRegex), let num = UInt8(match.output.1) { // hex num
+    } else if let match = text.wholeMatch(of: hexNumRegex), let num = UInt8(match.output.1, radix: 16) { // hex num
       self = .raw(num)
     } else if let num = UInt8(text) { // num
       self = .raw(num)
@@ -386,14 +386,14 @@ public enum KeyCode: Sendable, CustomStringConvertible {
     case .basic(let v):
       switch v {
       case .named(let n):
-        return String(format: "0x%04X[.\(n)]", self.rawValue)
+        return String(format: "0x%04x[.\(n)]", self.rawValue)
       case .raw(let r):
-        return String(format: "0x%04X", r)
+        return String(format: "0x%04x", r)
       }
     case .extended(let e):
-      return String(format: "0x%04X[.\(e)]", self.rawValue)
+      return String(format: "0x%04x[.\(e)]", self.rawValue)
     case .raw(let r):
-      return String(format: "0x%04X", r)
+      return String(format: "0x%04x", r)
     }
   }
 }

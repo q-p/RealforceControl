@@ -64,7 +64,7 @@ public actor Keyboard {
     case flush
   }
   
-  private let deviceClient: HIDDeviceClient
+  public let deviceClient: HIDDeviceClient
   private let logger = Logger(subsystem: "de.maven.RealforceControl", category: "Keyboard")
   private let loggerUsb = Logger(subsystem: "de.maven.RealforceControl", category: "USB")
   

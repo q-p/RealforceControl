@@ -16,13 +16,16 @@ let package = Package(
       targets: ["rfctrl"],
     ),
   ],
+  dependencies: [
+    .package(url: "https://github.com/apple/swift-argument-parser.git", .upToNextMajor(from: "1.5.0")),
+  ],
   targets: [
     .target(
       name: "RealforceControl",
     ),
     .executableTarget(
       name: "rfctrl",
-      dependencies: ["RealforceControl"],
+      dependencies: ["RealforceControl", .product(name: "ArgumentParser", package: "swift-argument-parser")],
     ),
-  ]
+  ],
 )

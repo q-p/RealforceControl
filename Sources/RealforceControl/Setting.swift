@@ -184,9 +184,9 @@ enum Setting: Sendable, Comparable, Hashable, CustomStringConvertible {
   public var description: String {
     switch self {
     case .named(let n):
-      return String(format: "0x%02X[.\(n)]", self.rawValue)
+      return String(format: "0x%02x[.\(n)]", self.rawValue)
     case .raw(let r):
-      return String(format: "0x%02X", r)
+      return String(format: "0x%02x", r)
     }
   }
 }
